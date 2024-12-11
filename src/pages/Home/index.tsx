@@ -29,6 +29,7 @@ interface Cycle {
   minutesAmount: number
   startDate: Date
   interruptedDate?: Date
+  finishedDate?: Date
 }
 export function Home() {
   const [cycles, setCycles] = useState<Cycle[]>([])
@@ -42,17 +43,33 @@ export function Home() {
     },
   })
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
+  const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
   useEffect(() => {
     let interval: number
     if(activeCycle) {
-       interval = setInterval(() => {
-        setAmountSecondsPast(differenceInSeconds(new Date(), activeCycle.startDate))
+      interval = setInterval(() => {
+        const secondsDifference = differenceInSeconds(new Date(), activeCycle.startDate)
+        if(secondsDifference >= totalSeconds) {
+          setCycles(state =>
+            state.map((cycle) => {
+              if(cycle.id === activeCycleId) {
+                return {...cycle, finishedDate: new Date()}
+              } else {
+                return cycle
+              }
+            })
+          )
+          setAmountSecondsPast(totalSeconds)
+          clearInterval(interval)
+        } else {
+          setAmountSecondsPast(secondsDifference)
+        }
       },1000)
     }
     return () => {
       clearInterval(interval)
     }
-  }, [activeCycle])
+  }, [activeCycle, totalSeconds, activeCycleId])
   function handleCreateNewCycle(data: NewCycleFormData) {
     const id = String(new Date().getTime())
     const newCycle: Cycle = {
@@ -68,7 +85,7 @@ export function Home() {
     reset()
   }
   function handleInterruptCycle() {
-    setCycles(cycles.map((cycle) => {
+    setCycles(state => state.map((cycle) => {
       if(cycle.id === activeCycleId) {
         return {...cycle, interruptedDate: new Date()}
       } else {
@@ -78,7 +95,6 @@ export function Home() {
     setActiveCycleId(null)
     setAmountSecondsPast(0)
   }
-  const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPast : 0
   const minutesAmount = Math.floor(currentSeconds / 60)
   const secondsAmount = currentSeconds % 60
