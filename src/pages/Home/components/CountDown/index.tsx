@@ -20,7 +20,7 @@ export function CountDown() {
       interval = setInterval(() => {
         const secondsDifference = differenceInSeconds(
           new Date(),
-          activeCycle.startDate,
+          new Date(activeCycle.startDate),
         )
         if (secondsDifference >= totalSeconds) {
           markCurrentCycleAsFinished()
@@ -49,6 +49,8 @@ export function CountDown() {
   useEffect(() => {
     if (activeCycle) {
       document.title = `${minutes}:${seconds}`
+    } else {
+      document.title = 'Pomodoro'
     }
   }, [minutes, seconds, activeCycle])
   return (
