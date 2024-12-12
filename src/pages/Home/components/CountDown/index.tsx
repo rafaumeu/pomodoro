@@ -22,6 +22,11 @@ export function CountDown() {
           new Date(),
           new Date(activeCycle.startDate),
         )
+        console.log({
+          secondsDifference,
+          totalSeconds,
+          isOver: secondsDifference >= totalSeconds,
+        })
         if (secondsDifference >= totalSeconds) {
           markCurrentCycleAsFinished()
           setSecondsPast(totalSeconds)

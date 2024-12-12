@@ -58,7 +58,7 @@ export function CyclesContextProvider({
   }, [cyclesState])
 
   function markCurrentCycleAsFinished() {
-    dispatch(markCurrentCycleAsFinished())
+    dispatch(markCurrentCycleAsFinished)
   }
   function setSecondsPast(seconds: number) {
     setAmountSecondsPast(seconds)
