@@ -1,4 +1,5 @@
 import { produce } from 'immer'
+
 import { ActionTypes } from './actions'
 
 export interface Cycle {
@@ -9,6 +10,7 @@ export interface Cycle {
   interruptedDate?: Date
   finishedDate?: Date
 }
+
 interface CyclesState {
   cycles: Cycle[]
   activeCycleId: string | null
@@ -25,9 +27,11 @@ export function CyclesReducer(state: CyclesState, action: any) {
       const currentCycleIndex = state.cycles.findIndex((cycle) => {
         return cycle.id === state.activeCycleId
       })
+
       if (currentCycleIndex < 0) {
         return state
       }
+
       return produce(state, (draft) => {
         draft.activeCycleId = null
         draft.cycles[currentCycleIndex].interruptedDate = new Date()
@@ -37,9 +41,11 @@ export function CyclesReducer(state: CyclesState, action: any) {
       const currentCycleIndex = state.cycles.findIndex((cycle) => {
         return cycle.id === state.activeCycleId
       })
+
       if (currentCycleIndex < 0) {
         return state
       }
+
       return produce(state, (draft) => {
         draft.activeCycleId = null
         draft.cycles[currentCycleIndex].finishedDate = new Date()

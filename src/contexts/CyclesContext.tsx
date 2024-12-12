@@ -3,6 +3,7 @@ import { createContext, useEffect, useReducer, useState } from 'react'
 import {
   addNewCycleAction,
   interruptCurrentCycleAction,
+  markCurrentCycleAsFinishedAction,
 } from '../reducers/cycles/actions'
 import { Cycle, CyclesReducer } from '../reducers/cycles/reducer'
 
@@ -58,7 +59,7 @@ export function CyclesContextProvider({
   }, [cyclesState])
 
   function markCurrentCycleAsFinished() {
-    dispatch(markCurrentCycleAsFinished)
+    dispatch(markCurrentCycleAsFinishedAction())
   }
   function setSecondsPast(seconds: number) {
     setAmountSecondsPast(seconds)
