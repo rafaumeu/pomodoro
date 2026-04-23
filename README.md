@@ -30,7 +30,7 @@ Follow these steps to run the project locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/rafaumeu/pomodoro-timer.git
+git clone https://github.com/rafaumeu/pomodoro.git
 
 # Install dependencies
 npm install
