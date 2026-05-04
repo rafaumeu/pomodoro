@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
-  ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript) ![Styled Components](https://img.shields.io/badge/Styled_Components-DB7093?style=for-the-badge)
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react" alt="React"/> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript" alt="TypeScript"/> <img src="https://img.shields.io/badge/Styled_Components-DB7093?style=for-the-badge" alt="Styled Components"/>
 </p>
 
 ## Overview
